@@ -5,5 +5,5 @@
 .eslintcache
 
 */**/node_modules/
-*/**/.vscode/
-*/**/.idea/
+.vscode
+.idea
