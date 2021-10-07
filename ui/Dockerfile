@@ -9,5 +9,6 @@ COPY package.json .
 COPY yarn.lock .
 
 EXPOSE 5000
-RUN yarn && yarn build
-CMD ["yarn", "serve"]
+
+RUN yarn && yarn build && yarn global add serve
+CMD yarn serve
