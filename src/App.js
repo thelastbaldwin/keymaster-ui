@@ -36,6 +36,12 @@ function App() {
 
   const [keyData, setKeyData] = useState([]);
 
+  const handleRemove = (index) => {
+    const copy = keyData.slice();
+    copy.splice(index, 1);
+    setKeyData(copy);
+  };
+
   return (
     <Grid container direction="row">
       <AppBar position="static">
@@ -113,6 +119,9 @@ function App() {
           <DiatonicTable
             key={`${kd.rootNote}-${kd.scale}-${i}`}
             scaleData={kd}
+            onRemove={() => {
+              handleRemove(i);
+            }}
           />
         ))}
       </Container>
