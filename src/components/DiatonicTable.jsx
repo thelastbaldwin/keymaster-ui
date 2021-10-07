@@ -1,5 +1,5 @@
 import React from "react";
-import { shape, arrayOf, string } from "prop-types";
+import { shape, arrayOf, string, func } from "prop-types";
 import { makeStyles } from "@material-ui/core";
 import {
   Paper,
@@ -9,20 +9,41 @@ import {
   TableRow,
   TableBody,
   TableCell,
+  Box,
+  Button,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((/* theme */) => ({
   tableHeading: {
     fontWeight: "bold",
   },
+  title: {
+    margin: 0,
+  },
+  wrapper: {
+    marginBottom: "15px",
+  },
 }));
 
-const DiatonicTable = ({ scaleData }) => {
+const DiatonicTable = ({ scaleData, onRemove }) => {
   const classes = useStyles();
 
   return (
-    <div>
-      <h3>{`${scaleData.rootNote} ${scaleData.scale}`}</h3>
+    <article className={classes.wrapper}>
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-between"
+        padding="0.5rem 0"
+        alignItems="flex-end"
+      >
+        <h3
+          className={classes.title}
+        >{`${scaleData.rootNote} ${scaleData.scale}`}</h3>
+        <Button color="secondary" onClick={onRemove}>
+          X
+        </Button>
+      </Box>
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
@@ -49,7 +70,7 @@ const DiatonicTable = ({ scaleData }) => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </article>
   );
 };
 
@@ -60,6 +81,7 @@ DiatonicTable.propTypes = {
     scale: string,
     chordQualites: arrayOf(string),
   }),
+  onRemove: func.isRequired,
 };
 
 export default DiatonicTable;
