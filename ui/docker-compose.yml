@@ -1,0 +1,18 @@
+version: "2.4"
+
+services:
+  ui:
+    container_name: ui
+    image: ui
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5050:5000"
+    restart: always
+    networks:
+      - b_sharp
+
+networks:
+  b_sharp:
+    name: b_sharp

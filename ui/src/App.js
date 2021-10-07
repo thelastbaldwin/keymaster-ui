@@ -12,7 +12,8 @@ import {
   MenuItem,
 } from "@material-ui/core";
 
-import { notes, scales, getChords } from "./keymaster";
+import { notes, scales } from "./const/const";
+import {getChords} from './api/getChords';
 import DiatonicTable from "./components/DiatonicTable";
 
 const useStyles = makeStyles((theme) => ({
@@ -103,10 +104,13 @@ function App() {
               variant="contained"
               onClick={() => {
                 if (rootNote && scale) {
+                  // call the api
                   const chords = getChords({ rootNote, scale, use7thChords });
-                  setKeyData([...keyData, chords]);
-                  setRootNote(null);
-                  setScale(null);
+
+                  // these steps stay the same
+                  // setKeyData([...keyData, chords]);
+                  // setRootNote(null);
+                  // setScale(null);
                 }
               }}
             >

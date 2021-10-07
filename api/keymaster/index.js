@@ -59,8 +59,8 @@ const flatMajorKeysList = "F Bb Eb Ab Db Gb".split(" ");
 const sharpMinorKeysList = "A E B F# C# G# D#".split(" ");
 const flatMinorKeysList = "D G C F Bb Eb".split(" ");
 
-const useSharps = (notes) => notes.map((n) => (Array.isArray(n) ? n[0] : n));
-const useFlats = (notes) => notes.map((n) => (Array.isArray(n) ? n[1] : n));
+const _useSharps = (notes) => notes.map((n) => (Array.isArray(n) ? n[0] : n));
+const _useFlats = (notes) => notes.map((n) => (Array.isArray(n) ? n[1] : n));
 
 // This will result in some irregularities with formatting certain notes.
 // It may be  best to use these tools to generate a large static dataset and
@@ -68,15 +68,15 @@ const useFlats = (notes) => notes.map((n) => (Array.isArray(n) ? n[1] : n));
 const formatScale = ({ rootNote, notes, scale }) => {
   if (isMinor(scale)) {
     if (sharpMinorKeysList.indexOf(rootNote) !== -1) {
-      return useSharps(notes);
+      return _useSharps(notes);
     } else if (flatMinorKeysList.indexOf(rootNote) !== -1) {
-      return useFlats(notes);
+      return _useFlats(notes);
     }
   } else if (isMajor(scale)) {
     if (sharpMajorKeysList.indexOf(rootNote) !== -1) {
-      return useSharps(notes);
+      return _useSharps(notes);
     } else if (flatMajorKeysList.indexOf(rootNote) !== -1) {
-      return useFlats(notes);
+      return _useFlats(notes);
     }
   }
   return notes;
