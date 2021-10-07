@@ -3,7 +3,7 @@ version: "2.4"
 services:
   ui:
     container_name: ui
-    image: ui
+    image: toad
     build:
       context: .
       dockerfile: Dockerfile

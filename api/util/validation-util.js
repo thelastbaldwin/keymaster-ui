@@ -13,7 +13,7 @@ const urlSlugValidation = ({ rootNote, scale, use7thChords}) => {
 
   if (rootNote && !apiFile.notes.find(n => {
     if (Array.isArray(n)) {
-      return (n.join().toLowerCase() === rootNote.toLowerCase());
+      return !!n.find(nn=>nn.toLowerCase() === rootNote.toLowerCase());
     }
 
     return n.toLowerCase() === rootNote.toLowerCase();

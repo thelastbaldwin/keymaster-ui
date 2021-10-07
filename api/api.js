@@ -1,17 +1,24 @@
-const express = require('express')
+const express = require('express');
 const app = express()
 const port = 9999
+const corsPort = 5050
 
 const { getChords } = require("./keymaster");
 const { urlSlugValidation } = require("./util/validation-util");
 const { normilizeNotes, nomilizeScale, nomilazeUse7thChords } = require("./util/mung-params");
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", `http://localhost:${corsPort}`); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/', (req, res) => {
   res.redirect('/api');
 })
 
 app.get('/api', (req, res) => {
-  res.send('Nothing to see here!, you need a NOTE and a SCALE');
+  res.status(400).send({ error: 'Nothing to see here!, you need a NOTE and a SCALE' });
 })
 
 app.get('/api/:rootNote', (req, res) => {
@@ -21,7 +28,7 @@ app.get('/api/:rootNote', (req, res) => {
   if (validation === true) {
     res.send(JSON.stringify({ rootNote }));
   } else {
-    res.send(validation);
+    res.status(400).send({ error: validation });
   }
 });
 
@@ -43,10 +50,10 @@ app.get('/api/:rootNote/:scale', (req, res) => {
 
     res.send(response);
   } else {
-    res.send(validation);
+    res.status(400).send({ error: validation });
   }
 })
 
 app.listen(port, () => {
-  console.log(`http://localhost:${port} <== It's over 9000!`)
+  console.log(`http://localhost:${port} <== It's over 9000!`);
 })

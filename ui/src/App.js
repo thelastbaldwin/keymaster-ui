@@ -107,7 +107,7 @@ function App() {
                   // call the api
                   const chords = getChords({ rootNote, scale, use7thChords });
 
-                  // these steps stay the same
+                  // TODO: these steps stay the same
                   // setKeyData([...keyData, chords]);
                   // setRootNote(null);
                   // setScale(null);
