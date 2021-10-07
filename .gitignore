@@ -1,2 +1,9 @@
 .eslintcache
 .DS_Store
+.env.local
+
+.eslintcache
+
+*/**/node_modules/
+*/**/.vscode/
+*/**/.idea/

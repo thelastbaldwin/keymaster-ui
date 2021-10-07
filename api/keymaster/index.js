@@ -268,4 +268,4 @@ const getChords = ({ rootNote, scale, use7thChords }) => {
   };
 };
 
-export { notes, scales, getChords };
+module.exports = { notes, scales, getChords };
