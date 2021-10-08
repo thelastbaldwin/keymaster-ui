@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express()
-const port = 9999
-const corsPort = 5050
+const port = process.env.API_PORT;
+const corsPort = process.env.UI_PORT;
 
 const { getChords } = require("./keymaster");
 const { urlSlugValidation } = require("./util/validation-util");
@@ -13,11 +13,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', (req, res) => {
+app.get('/', (_req, res) => {
   res.redirect('/api');
 })
 
-app.get('/api', (req, res) => {
+app.get('/api', (_req, res) => {
   res.status(400).send({ error: 'Nothing to see here!, you need a NOTE and a SCALE' });
 })
 

@@ -8,6 +8,6 @@
     "prettier": "^2.2.0"
   },
   "scripts": {
-    "start": "node ./api.js"
+    "start": "set -a; source .env; set -a && node ./api.js"
   }
 }

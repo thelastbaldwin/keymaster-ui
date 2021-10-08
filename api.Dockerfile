@@ -8,8 +8,10 @@ ADD api//util ./util/
 COPY api/api.js .
 COPY api/package.json .
 COPY api/yarn.lock .
+COPY api/.env .
 
-EXPOSE 9000
+# TODO sync with environment variables
+EXPOSE 9999
 
 RUN yarn
 CMD yarn start
