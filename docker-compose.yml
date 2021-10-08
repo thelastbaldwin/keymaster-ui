@@ -1,0 +1,35 @@
+version: "2.4"
+
+services:
+  api:
+    container_name: api
+    image: api
+    volumes:
+      - api-stuff:/node_modules
+    build:
+      context: .
+      dockerfile: api.Dockerfile
+    ports:
+      - "9000:9999"
+    restart: always
+    networks:
+      - b_sharp
+  ui:
+    container_name: ui
+    image: toad
+    volumes:
+      - ui-stuff:/node_modules
+    build:
+      context: .
+      dockerfile: ui.Dockerfile
+    ports:
+      - "5050:5000"
+    restart: always
+    networks:
+      - b_sharp
+volumes:
+  api-stuff:
+  ui-stuff:
+networks:
+  b_sharp:
+    name: b_sharp
