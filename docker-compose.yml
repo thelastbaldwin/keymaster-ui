@@ -5,12 +5,11 @@ services:
     container_name: key_api
     image: key_api
     env_file:
-      - ./api/.env
+      - ./.env
     volumes:
-      - ./api/node_modules:/node_modules
       - ./api/util:/util
       - ./api/api.js:/api.js
-      - api-modules:/node_modules
+      - api-modules:/api/node_modules
     build:
       context: .
       dockerfile: api.Dockerfile
@@ -24,12 +23,11 @@ services:
     container_name: key_ui
     image: key_ui
     env_file:
-      - ./ui/.env
+      - ./.env
     volumes:
-      - ./ui/node_modules:/node_modules
       - ./ui/public:/public
       - ./ui/src:/src
-      - ui-modules:/node_modules
+      - ui-modules:/ui/node_modules
     build:
       context: .
       dockerfile: ui.Dockerfile
