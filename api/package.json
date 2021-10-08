@@ -8,6 +8,10 @@
     "prettier": "^2.2.0"
   },
   "scripts": {
-    "start": "set -a; source .env; set -a && node ./api.js"
+    "start": "set -a; source .env; set -a && node ./api.js",
+    "dev": "set -a; source .env; set -a && nodemon ./api.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.13"
   }
 }
