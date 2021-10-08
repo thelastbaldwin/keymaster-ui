@@ -9,11 +9,5 @@
   },
   "scripts": {
     "start": "node ./api.js"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   }
 }

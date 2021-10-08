@@ -1,13 +1,7 @@
 const normilizeNotes = rootNote => {
   let notes = rootNote;
 
-  if (notes.indexOf(',') >= 0) {
-    notes = notes.split(',');
-
-    notes = notes[1].charAt(0).toUpperCase() + notes[1].slice(1).toLowerCase();
-  } else {
-    notes = notes.toUpperCase();
-  }
+  notes = notes.charAt(0).toUpperCase() + notes.slice(1).toLowerCase();
 
   return notes;
 }

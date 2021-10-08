@@ -3,10 +3,10 @@ FROM node:14
 # Create app directory
 WORKDIR /ui
 
-ADD /public ./public/
-ADD /src ./src/
-COPY package.json .
-COPY yarn.lock .
+ADD ui/public ./public/
+ADD ui/src ./src/
+COPY ui/package.json .
+COPY ui/yarn.lock .
 
 EXPOSE 5000
 

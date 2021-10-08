@@ -43,7 +43,7 @@ app.get('/api/:rootNote/:scale', (req, res) => {
     const use7th = nomilazeUse7thChords(use7thChords);
 
     const response = getChords({
-      rootNote :notes,
+      rootNote: notes,
       scale: scales,
       use7thChords: use7th
     });
