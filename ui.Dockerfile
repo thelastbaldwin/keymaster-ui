@@ -5,6 +5,7 @@ WORKDIR /
 
 COPY ./ui/ .
 
+# MUST MATCH ENV VAR
 EXPOSE 5000
 
 # TARGET: local-dev

@@ -1,0 +1,9 @@
+version: "2.4"
+
+services:
+  api:
+    env_file:
+      - ./.production.env
+  ui:
+    env_file:
+      - ./.production.env

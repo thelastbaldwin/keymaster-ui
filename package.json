@@ -2,7 +2,7 @@
   "name": "keymaster-ui",
   "version": "1.0.0",
   "scripts": {
-    "start": "yarn build-prod-api && yarn build-prod-ui && docker-compose up -d && open http://localhost:5000",
+    "start": "yarn build-prod-api && yarn build-prod-ui && docker-compose -f docker-compose.yml -f docker-compose.production.yml up -d",
     "stop": "docker-compose down -v",
     "build-prod-api": "docker build --target prod --no-cache -f api.Dockerfile .",
     "build-prod-ui": "docker build --target prod --no-cache -f ui.Dockerfile .",
