@@ -2,8 +2,8 @@ version: "2.4"
 
 services:
   api:
-    container_name: api
-    image: api
+    container_name: key_api
+    image: key_api
     volumes:
       - api-stuff:/node_modules
     build:
@@ -15,8 +15,8 @@ services:
     networks:
       - b_sharp
   ui:
-    container_name: ui
-    image: toad
+    container_name: key_ui
+    image: key_ui
     volumes:
       - ui-stuff:/node_modules
     build:
