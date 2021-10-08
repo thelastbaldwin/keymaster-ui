@@ -1,17 +1,23 @@
-FROM node:14
+FROM node:14 as base
 
 # Create app directory
-WORKDIR /ui
+WORKDIR /
 
-ADD ui/public ./public/
-ADD ui/src ./src/
-COPY ui/package.json .
-COPY ui/yarn.lock .
-COPY ui/.env .
+COPY ./ui/ .
 
-# TODO sync with environment variables
 EXPOSE 5000
+
+# TARGET: local-dev
+FROM base AS local-dev
+
+RUN yarn
+
+CMD [ "yarn", "start" ]
+
+
+FROM base as prod
 
 RUN set -a; source .env; set -a
 RUN yarn && yarn build && yarn global add serve
-CMD yarn serve
+
+CMD [ "yarn", "serve" ]

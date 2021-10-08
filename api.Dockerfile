@@ -1,17 +1,20 @@
-FROM node:14
+FROM node:14 as base
 
 # Create app directory
 WORKDIR /
 
-ADD api/keymaster ./keymaster/
-ADD api//util ./util/
-COPY api/api.js .
-COPY api/package.json .
-COPY api/yarn.lock .
-COPY api/.env .
+COPY api/ .
 
 # TODO sync with environment variables
 EXPOSE 9999
 
 RUN yarn
-CMD yarn start
+
+# TARGET: local-dev
+FROM base AS local-dev
+
+CMD [ "yarn", "dev" ]
+
+FROM base as prod
+
+CMD [ "yarn", "start" ]

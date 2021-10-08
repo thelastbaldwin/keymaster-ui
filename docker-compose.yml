@@ -7,10 +7,14 @@ services:
     env_file:
       - ./api/.env
     volumes:
-      - api-stuff:/node_modules
+      - ./api/node_modules:/node_modules
+      - ./api/util:/util
+      - ./api/api.js:/api.js
+      - api-modules:/node_modules
     build:
       context: .
       dockerfile: api.Dockerfile
+      target: local-dev
     ports:
       - "9999:9999"
     restart: always
@@ -22,18 +26,25 @@ services:
     env_file:
       - ./ui/.env
     volumes:
-      - ui-stuff:/node_modules
+      - ./ui/node_modules:/node_modules
+      - ./ui/public:/public
+      - ./ui/src:/src
+      - ui-modules:/node_modules
     build:
       context: .
       dockerfile: ui.Dockerfile
+      target: local-dev
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - CI=true
     ports:
       - "5000:5000"
     restart: always
     networks:
       - b_sharp
 volumes:
-  api-stuff:
-  ui-stuff:
+  api-modules:
+  ui-modules:
 networks:
   b_sharp:
     name: b_sharp
