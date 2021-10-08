@@ -102,15 +102,15 @@ function App() {
             <Button
               color="primary"
               variant="contained"
-              onClick={() => {
+              onClick={async () => {
                 if (rootNote && scale) {
-                  // call the api
-                  const chords = getChords({ rootNote, scale, use7thChords });
+                  const chords = await getChords({ rootNote, scale, use7thChords });
+                  if (chords){
+                    setKeyData([...keyData, chords]);
+                    setRootNote(null);
+                    setScale(null);
 
-                  // TODO: these steps stay the same
-                  // setKeyData([...keyData, chords]);
-                  // setRootNote(null);
-                  // setScale(null);
+                  }
                 }
               }}
             >

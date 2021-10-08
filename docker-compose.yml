@@ -4,26 +4,30 @@ services:
   api:
     container_name: key_api
     image: key_api
+    env_file:
+      - ./api/.env
     volumes:
       - api-stuff:/node_modules
     build:
       context: .
       dockerfile: api.Dockerfile
     ports:
-      - "9000:9999"
+      - "9999:9999"
     restart: always
     networks:
       - b_sharp
   ui:
     container_name: key_ui
     image: key_ui
+    env_file:
+      - ./ui/.env
     volumes:
       - ui-stuff:/node_modules
     build:
       context: .
       dockerfile: ui.Dockerfile
     ports:
-      - "5050:5000"
+      - "5000:5000"
     restart: always
     networks:
       - b_sharp

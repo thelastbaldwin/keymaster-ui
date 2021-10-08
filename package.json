@@ -2,7 +2,7 @@
   "name": "keymaster-ui",
   "version": "1.0.0",
   "scripts": {
-    "start": "docker-compose up -d && open http://localhost:5050",
+    "start": "docker-compose up -d && open http://localhost:5000",
     "stop": "docker-compose down -v",
     "docker-build": "docker-compose build --no-cache"
   }
