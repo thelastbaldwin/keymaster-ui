@@ -107,8 +107,8 @@ function App() {
                   const chords = await getChords({ rootNote, scale, use7thChords });
                   if (chords){
                     setKeyData([...keyData, chords]);
-                    setRootNote(null);
-                    setScale(null);
+                    setRootNote("");
+                    setScale("");
 
                   }
                 }
