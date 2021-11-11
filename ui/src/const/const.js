@@ -34,12 +34,19 @@ const notes = [
 const scales = {
   MAJOR: "major",
   MINOR: "minor",
+  IONIAN_MAJOR: "ionian major",
+  DORIAN_MINOR: 'dorian minor',
+  PHRYGIAN_MINOR: 'phrygian minor',
+  LYDIAN_MAJOR: 'lydian major',
+  MIXOLYDIAN_MAJOR: 'mixolydian major',
+  AEOLIAN_MINOR: 'aeolian minor',
+  LOCRIAN_MINOR: 'locrian minor',
   MELODIC_MINOR: "melodic minor",
   HARMONIC_MINOR: "harmonic minor",
 };
 
 export {
-  chords, 
-  notes, 
+  chords,
+  notes,
   scales,
 };

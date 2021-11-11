@@ -1,3 +1,5 @@
+const { shiftArrayStart } = require("../util/array");
+
 // TODO: revise symbols
 const chords = {
   major: "Major",
@@ -34,6 +36,13 @@ const notes = [
 const scales = {
   MAJOR: "major",
   MINOR: "minor",
+  IONIAN_MAJOR: "ionian major",
+  DORIAN_MINOR: 'dorian minor',
+  PHRYGIAN_MINOR: 'phrygian minor',
+  LYDIAN_MAJOR: 'lydian major',
+  MIXOLYDIAN_MAJOR: 'mixolydian major',
+  AEOLIAN_MINOR: 'aeolian minor',
+  LOCRIAN_MINOR: 'locrian minor',
   MELODIC_MINOR: "melodic minor",
   HARMONIC_MINOR: "harmonic minor",
 };
@@ -82,7 +91,7 @@ const formatScale = ({ rootNote, notes, scale }) => {
   return notes;
 };
 
-const flatten = (i, amt) => {
+const flatten = (i, amt = 1) => {
   let newIndex = i - amt;
   if (newIndex >= 0) {
     return newIndex;
@@ -136,6 +145,53 @@ const deriveNaturalMinor = (root) => {
 
   return scale;
 };
+
+// modes
+const deriveIonian = deriveMajor;
+
+const deriveDorian = root => {
+  const scale = deriveNaturalMinor(root);
+  const raisedSix = halfStep(findNoteIndex(scale[5]));
+  scale[5] = notes[raisedSix];
+
+  return scale;
+}
+
+const derivePhrygian = root => {
+  const scale = deriveNaturalMinor(root);
+  const flatTwo = flatten(findNoteIndex(scale[1]));
+  scale[1] = notes[flatTwo];
+
+  return scale;
+}
+
+const deriveLydian = root => {
+  const scale = deriveMajor(root);
+  const raisedFour = halfStep(findNoteIndex(scale[3]));
+  scale[3] = notes[raisedFour];
+
+  return scale;
+}
+
+const deriveMixolydian = root => {
+  const scale = deriveMajor(root);
+  const flatSeven = flatten(findNoteIndex(scale[6]));
+  scale[6] = notes[flatSeven];
+
+  return scale;
+}
+
+const deriveAeolian = deriveNaturalMinor;
+
+const derieveLocrian = root => {
+  const scale = deriveNaturalMinor(root);
+  const flatTwo = flatten(findNoteIndex(scale[1]));
+  scale[1] = notes[flatTwo];
+  const flatFive = flatten(findNoteIndex(scale[4]));
+  scale[4] = notes[flatFive];
+
+  return scale;
+}
 
 const deriveMelodicMinor = (root) => {
   const scale = deriveNaturalMinor(root);
@@ -191,7 +247,7 @@ const diatonicMinor7Chords = [
   chords.major7,
   chords.minor7,
   chords.minor7,
-  chords.minor7,
+  chords.major7,
   chords.dominant7,
 ];
 const diatonicHarmonicMinorChords = [
@@ -243,6 +299,41 @@ const getChords = ({ rootNote, scale, use7thChords }) => {
       triads: diatonicMajorChords,
       seventhChords: diatonicMajor7Chords,
       generator: deriveMajor,
+    },
+    [scales.IONIAN_MAJOR]: {
+      triads: diatonicMajorChords,
+      seventhChords: diatonicMajor7Chords,
+      generator: deriveMajor,
+    },
+    [scales.DORIAN_MINOR]: {
+      triads: shiftArrayStart(diatonicMajorChords, 1),
+      seventhChords: shiftArrayStart(diatonicMajor7Chords, 1),
+      generator: deriveDorian,
+    },
+    [scales.PHRYGIAN_MINOR]: {
+      triads: shiftArrayStart(diatonicMajorChords, 2),
+      seventhChords: shiftArrayStart(diatonicMajor7Chords, 2),
+      generator: derivePhrygian,
+    },
+    [scales.LYDIAN_MAJOR]: {
+      triads: shiftArrayStart(diatonicMajorChords, 3),
+      seventhChords: shiftArrayStart(diatonicMajor7Chords, 3),
+      generator: deriveLydian,
+    },
+    [scales.MIXOLYDIAN_MAJOR]: {
+      triads: shiftArrayStart(diatonicMajorChords, 4),
+      seventhChords: shiftArrayStart(diatonicMajor7Chords, 4),
+      generator: deriveMixolydian,
+    },
+    [scales.AEOLIAN_MINOR]: {
+      triads: shiftArrayStart(diatonicMajorChords, 5),
+      seventhChords: shiftArrayStart(diatonicMajor7Chords, 5),
+      generator: deriveAeolian,
+    },
+    [scales.LOCRIAN_MINOR]: {
+      triads: shiftArrayStart(diatonicMajorChords, 6),
+      seventhChords: shiftArrayStart(diatonicMajor7Chords, 6),
+      generator: derieveLocrian,
     },
     [scales.MINOR]: minorMap,
     [scales.HARMONIC_MINOR]: {

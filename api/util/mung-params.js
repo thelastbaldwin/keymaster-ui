@@ -7,7 +7,7 @@ const normilizeNotes = rootNote => {
 }
 
 const nomilizeScale = scale => {
-  return scale.replace(/[-_]/gim, ' ').toLowerCase();
+  return scale.replace(/[_-]/gim, ' ').toLowerCase();
 }
 
 const nomilazeUse7thChords = use7thChords => {
