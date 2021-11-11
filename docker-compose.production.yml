@@ -4,6 +4,10 @@ services:
   api:
     env_file:
       - ./.production.env
+    volumes:
+      - api-modules:/api/node_modules
   ui:
     env_file:
       - ./.production.env
+    volumes:
+      - ui-modules:/ui/node_modules

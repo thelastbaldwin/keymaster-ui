@@ -5,7 +5,7 @@ const corsPort = process.env.UI_PORT;
 
 const { getChords } = require("./keymaster");
 const { urlSlugValidation } = require("./util/validation-util");
-const { normilizeNotes, nomilizeScale, nomilazeUse7thChords } = require("./util/mung-params");
+const { normalizeNotes, normalizeScale, normalizeUse7thChords } = require("./util/munge-params");
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", `http://localhost:${corsPort}`); // update to match the domain you will make the request from
@@ -35,12 +35,13 @@ app.get('/api/:rootNote', (req, res) => {
 app.get('/api/:rootNote/:scale', (req, res) => {
   const { rootNote, scale } = req.params;
   const { use7thChords = 'false' } = req.query;
+  console.log(`Trying to serve ${rootNote} ${scale} with use7thChords: ${use7thChords}`)
   const validation = urlSlugValidation({rootNote, scale, use7thChords});
 
   if (validation === true) {
-    const notes = normilizeNotes(rootNote);
-    const scales = nomilizeScale(scale);
-    const use7th = nomilazeUse7thChords(use7thChords);
+    const notes = normalizeNotes(rootNote);
+    const scales = normalizeScale(scale);
+    const use7th = normalizeUse7thChords(use7thChords);
 
     const response = getChords({
       rootNote: notes,

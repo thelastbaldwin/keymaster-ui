@@ -1,6 +1,7 @@
 .eslintcache
 .DS_Store
 .env.local
+yarn-error.log
 
 **/node_modules
 .vscode

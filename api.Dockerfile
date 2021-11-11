@@ -1,7 +1,7 @@
 FROM node:14 as base
 
 # Create app directory
-WORKDIR /
+WORKDIR /service
 
 COPY api/ .
 
